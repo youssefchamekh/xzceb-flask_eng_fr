@@ -15,9 +15,34 @@ language_translator = LanguageTranslatorV3(
     authenticator=authenticator
 )
 
-language_translator.set_service_url(url)
 
-translation = language_translator.translate(
-    text='Hello, how are you today?',
-    model_id='en-es').get_result()
-print(json.dumps(translation, indent=2, ensure_ascii=False))
+def englishToFrench(englishtext):
+    language_translator.set_service_url(url)
+    translation = language_translator.translate(
+    text=englishtext,
+    model_id='en-fr').get_result()
+    translations = json.dumps(translation, indent=2, ensure_ascii=False)
+
+    response_info = json.loads(translations)
+
+    x = response_info.get("translations")[0]
+    frenchText = x.get("translation")
+    print (frenchText)
+
+def frenchToEnglish(frenchtext):
+    language_translator.set_service_url(url)
+    translation = language_translator.translate(
+    text=frenchtext,
+    model_id='fr-en').get_result()
+    translations = json.dumps(translation, indent=2, ensure_ascii=False)
+
+    response_info = json.loads(translations)
+
+    x = response_info.get("translations")[0]
+    englishText = x.get("translation")
+    return (englishText)
+
+
+
+
+
